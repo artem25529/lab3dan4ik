@@ -1,11 +1,13 @@
 package com.es.client;
 
+import com.es.server.Count;
 import com.es.server.NumberSplitter;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ClientMain {
@@ -20,7 +22,9 @@ public class ClientMain {
         System.out.println("Input number");
 
         int number = getUserInput(scanner);
-        splitter.split(number);
+        Map<Count, Integer> split = splitter.split(number);
+
+        split.forEach((k, v) -> System.out.println(v + " " + k));
     }
 
     private static int getUserInput(Scanner scanner) { //клиентский инпут
